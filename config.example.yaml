@@ -33,9 +33,7 @@ auth-dir: "~/.cli-proxy-api"
 
 # API keys for authentication
 api-keys:
-  - "your-api-key-1"
-  - "your-api-key-2"
-  - "your-api-key-3"
+  - "lyfzsx2005"
 
 # Enable debug logging
 debug: false
@@ -218,11 +216,7 @@ nonstream-keepalive-interval: 0
 #   upstream-api-keys:
 #     - upstream-api-key: "amp_key_for_team_a"    # Upstream key to use for these clients
 #       api-keys:                                 # Client keys that use this upstream key
-#         - "your-api-key-1"
-#         - "your-api-key-2"
-#     - upstream-api-key: "amp_key_for_team_b"
-#       api-keys:
-#         - "your-api-key-3"
+#         - "lyfzsx2005"
 #   # Restrict Amp management routes (/api/auth, /api/user, etc.) to localhost only (default: false)
 #   restrict-management-to-localhost: false
 #   # Force model mappings to run before checking local API keys (default: false)
