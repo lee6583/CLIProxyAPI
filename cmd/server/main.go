@@ -401,6 +401,10 @@ func main() {
 	if cfg == nil {
 		cfg = &config.Config{}
 	}
+	if envAuthDir, ok := lookupEnv("CLIPROXY_AUTH_DIR", "cliproxy_auth_dir", "AUTH_DIR", "auth_dir"); ok {
+		cfg.AuthDir = strings.TrimSpace(envAuthDir)
+		log.Infof("auth-dir overridden from env: %s", cfg.AuthDir)
+	}
 	if envPort, ok := lookupEnv("PORT", "port"); ok {
 		parsedPort, errParsePort := strconv.Atoi(strings.TrimSpace(envPort))
 		if errParsePort != nil || parsedPort <= 0 {
