@@ -401,6 +401,20 @@ func main() {
 	if cfg == nil {
 		cfg = &config.Config{}
 	}
+	if envAPIKeys, ok := lookupEnv("CLIPROXY_API_KEYS", "cliproxy_api_keys", "API_KEYS", "api_keys"); ok {
+		rawKeys := strings.Split(envAPIKeys, ",")
+		keys := make([]string, 0, len(rawKeys))
+		for _, key := range rawKeys {
+			trimmed := strings.TrimSpace(key)
+			if trimmed != "" {
+				keys = append(keys, trimmed)
+			}
+		}
+		if len(keys) > 0 {
+			cfg.APIKeys = keys
+			log.Infof("api-keys overridden from env: %d keys", len(keys))
+		}
+	}
 	if envAuthDir, ok := lookupEnv("CLIPROXY_AUTH_DIR", "cliproxy_auth_dir", "AUTH_DIR", "auth_dir"); ok {
 		cfg.AuthDir = strings.TrimSpace(envAuthDir)
 		log.Infof("auth-dir overridden from env: %s", cfg.AuthDir)
