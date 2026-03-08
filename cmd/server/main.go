@@ -13,6 +13,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -384,6 +385,13 @@ func main() {
 			return
 		}
 		configFilePath = filepath.Join(wd, "config.yaml")
+		if _, errStat := os.Stat(configFilePath); errors.Is(errStat, fs.ErrNotExist) {
+			fallbackPath := filepath.Join(wd, "config.example.yaml")
+			if _, errFallback := os.Stat(fallbackPath); errFallback == nil {
+				log.Warnf("config.yaml not found, falling back to %s", fallbackPath)
+				configFilePath = fallbackPath
+			}
+		}
 		cfg, err = config.LoadConfigOptional(configFilePath, isCloudDeploy)
 	}
 	if err != nil {
@@ -392,6 +400,18 @@ func main() {
 	}
 	if cfg == nil {
 		cfg = &config.Config{}
+	}
+	if envPort, ok := lookupEnv("PORT", "port"); ok {
+		parsedPort, errParsePort := strconv.Atoi(strings.TrimSpace(envPort))
+		if errParsePort != nil || parsedPort <= 0 {
+			log.Warnf("ignore invalid PORT value: %q", envPort)
+		} else {
+			cfg.Port = parsedPort
+			if strings.TrimSpace(cfg.Host) == "" {
+				cfg.Host = "0.0.0.0"
+			}
+			log.Infof("port overridden from env: %d", cfg.Port)
+		}
 	}
 
 	// In cloud deploy mode, check if we have a valid configuration
