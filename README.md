@@ -64,6 +64,8 @@ CLIProxyAPI Guides: [https://help.router-for.me/](https://help.router-for.me/)
 
 see [MANAGEMENT_API.md](https://help.router-for.me/management/api)
 
+Render free-tier persistence guide (GitStore, no paid disk): [RENDER_FREE_PERSISTENCE_CN.md](RENDER_FREE_PERSISTENCE_CN.md)
+
 ## Amp CLI Support
 
 CLIProxyAPI includes integrated support for [Amp CLI](https://ampcode.com) and Amp IDE extensions, enabling you to use your Google/ChatGPT/Claude OAuth subscriptions with Amp's coding tools:

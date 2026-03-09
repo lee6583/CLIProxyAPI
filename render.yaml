@@ -1,0 +1,31 @@
+# Render Blueprint (free tier friendly)
+# Goal: keep auth/config durable without paid disk/db by using Git-backed token store.
+
+services:
+  - type: web
+    name: cliproxyapi
+    runtime: go
+    region: singapore
+    plan: free
+    buildCommand: go build -o cliproxyapi ./cmd/server
+    startCommand: ./cliproxyapi
+    envVars:
+      # Cloud mode for Render
+      - key: DEPLOY
+        value: cloud
+
+      # Required runtime secrets/settings
+      - key: CLIPROXY_API_KEYS
+        sync: false
+      - key: MANAGEMENT_PASSWORD
+        sync: false
+
+      # Free persistence via Git store
+      - key: GITSTORE_GIT_URL
+        sync: false
+      - key: GITSTORE_GIT_USERNAME
+        value: git
+      - key: GITSTORE_GIT_TOKEN
+        sync: false
+      - key: GITSTORE_LOCAL_PATH
+        value: /tmp/cliproxy

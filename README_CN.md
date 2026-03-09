@@ -66,6 +66,8 @@ CLIProxyAPI 用户手册： [https://help.router-for.me/](https://help.router-fo
 
 **核心服务启动与 CPA 对接**（chatgpt_register / CPA-Dashboard）：[docs/CPA_INTEGRATION_CN.md](docs/CPA_INTEGRATION_CN.md)
 
+**Render 免费持久化（不升级套餐）**：[RENDER_FREE_PERSISTENCE_CN.md](RENDER_FREE_PERSISTENCE_CN.md)
+
 ## Amp CLI 支持
 
 CLIProxyAPI 已内置对 [Amp CLI](https://ampcode.com) 和 Amp IDE 扩展的支持，可让你使用自己的 Google/ChatGPT/Claude OAuth 订阅来配合 Amp 编码工具：
